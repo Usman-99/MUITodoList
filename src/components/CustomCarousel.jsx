@@ -31,7 +31,6 @@ const CustomCarousel = ({ imglist }) => {
 
   return (
     <Box sx={{ position: 'relative', width: '100%', overflow: 'hidden' }}>
-      {/* Carousel Wrapper */}
       <Box
         sx={{
           position: 'relative',

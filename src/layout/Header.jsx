@@ -1,16 +1,19 @@
-import { useState } from 'react';
-import {useLocation,Link} from "react-router-dom"
-import { Button,Avatar,Typography,IconButton,Container,Menu,AppBar,Box,Toolbar,Tooltip,MenuItem } from "@mui/material"
+import { useState, useEffect } from 'react';
+import { Avatar, Typography, IconButton, Container, Menu, AppBar, Box, Toolbar, Tooltip, MenuItem } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import AdbIcon from '@mui/icons-material/Adb';
+import CustomButton from '../components/CustomButton';
+import { Link, useLocation } from 'react-router-dom'; 
+import { pages } from './Footer'; 
 
-const pages = ['Home', 'Products', 'Cart'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
 
+  const { pathname, hash } = useLocation(); // Get current route path and hash
+  
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
@@ -25,10 +28,20 @@ function ResponsiveAppBar() {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
-  const CommonObj = {
-    vertical: 'top',
-    horizontal: 'right',
-  }
+
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
+  };
+
+  useEffect(() => {
+    if (!hash) {
+      scrollToTop(); 
+    }
+  }, [pathname, hash]);
 
   return (
     <AppBar position="static">
@@ -52,6 +65,7 @@ function ResponsiveAppBar() {
             MUI-PROJECT
           </Typography>
 
+          {/* Mobile Menu Icon */}
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton
               size="large"
@@ -66,32 +80,37 @@ function ResponsiveAppBar() {
             <Menu
               id="menu-appbar"
               anchorEl={anchorElNav}
-              anchorOrigin={{
-                vertical: 'bottom',
-                horizontal: 'left',
-              }}
+              anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
               keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'left',
-              }}
+              transformOrigin={{ vertical: 'top', horizontal: 'left' }}
               open={Boolean(anchorElNav)}
               onClose={handleCloseNavMenu}
               sx={{ display: { xs: 'block', md: 'none' } }}
             >
-              {pages?.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography sx={{ textAlign: 'center' }}>{page}</Typography>
+              {pages?.map((page, index) => (
+                <MenuItem key={index} onClick={handleCloseNavMenu}>
+                  <Typography sx={{ textAlign: 'center' }}>
+                    <Link
+                      to={page.path}
+                      style={{ color: 'inherit', textDecoration: 'none' }}
+                      onClick={() => {
+                        if (pathname === page.path) scrollToTop();
+                      }}
+                    >
+                      {page.name} {/* Only render the name */}
+                    </Link>
+                  </Typography>
                 </MenuItem>
               ))}
             </Menu>
           </Box>
+
           <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
           <Typography
             variant="h5"
             noWrap
             component="a"
-            href="#app-bar-with-responsive-menu"
+            href="/"
             sx={{
               mr: 2,
               display: { xs: 'flex', md: 'none' },
@@ -105,17 +124,30 @@ function ResponsiveAppBar() {
           >
             LOGO
           </Typography>
+
+          {/* Desktop Menu Links */}
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            {pages?.map((page) => (
-              <Button
-                key={page}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', display: 'block' }}
-              >
-                {page}
-              </Button>
+            {pages?.map((page, index) => (
+              <CustomButton
+                key={index}
+                Onclick={handleCloseNavMenu}
+                SX={{ my: 2, color: 'white', display: 'block' }}
+                Text={
+                  <Link
+                    to={page.path}
+                    style={{ color: 'inherit', textDecoration: 'none' }}
+                    onClick={() => {
+                      if (pathname === page.path) scrollToTop();
+                    }}
+                  >
+                    {page.name} {/* Only render the name */}
+                  </Link>
+                }
+              />
             ))}
           </Box>
+
+          {/* User Settings */}
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
@@ -126,15 +158,15 @@ function ResponsiveAppBar() {
               sx={{ mt: '45px' }}
               id="menu-appbar"
               anchorEl={anchorElUser}
-              anchorOrigin={CommonObj}
+              anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
               keepMounted
-              transformOrigin={CommonObj}
+              transformOrigin={{ vertical: 'top', horizontal: 'right' }}
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {settings?.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography sx={{ textAlign: 'center' }}>{setting}</Typography>
+              {settings?.map((setting, index) => (
+                <MenuItem key={index} onClick={handleCloseUserMenu}>
+                  <Typography textAlign="center">{setting}</Typography>
                 </MenuItem>
               ))}
             </Menu>
@@ -144,4 +176,5 @@ function ResponsiveAppBar() {
     </AppBar>
   );
 }
+
 export default ResponsiveAppBar;

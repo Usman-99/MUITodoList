@@ -3,6 +3,7 @@ import CustomCarousel from "../components/CustomCarousel";
 import FeedbackForm from "../components/FeedbackForm"; // Adjust the path
 import CustomSidebar from "../components/CustomSidebar"; // Adjust the path
 import { Box, Container } from "@mui/material";
+import Grid from "@mui/material/Grid2";
 
 const Home = () => {
   const imglist = [
@@ -36,28 +37,17 @@ const Home = () => {
 
   return (
     <Container sx={{ mt: 4 }}>
-      {/* Carousel Section */}
       <Box mb={6}>
         <CustomCarousel imglist={imglist} />
-      </Box>
-
-      {/* Sidebar and Form Layout */}
-      <Box
-        display="flex"
-        flexDirection={{ xs: "column", lg: "row" }}
-        gap={4}
-        mt={4}
-      >
-        {/* Sidebar */}
-        <Box flexBasis={{ xs: "100%", lg: "25%" }} mb={{ xs: 4, lg: 0 }}>
-          <CustomSidebar />
-        </Box>
-
-        {/* Feedback Form */}
-        <Box flexGrow={1} display="flex" justifyContent="center">
-          <FeedbackForm onSubmit={handleFormSubmit} />
-        </Box>
-      </Box>
+      </Box>     
+        <Grid container rowSpacing={3} columnSpacing={{ xs: 1, sm: 2, md: 3,lg:7,xl:6 }} sx={{placeContent:"center"}}>
+          <Grid size={{ xs: 11, sm: 11, md: 5, lg: 5, xl: 6 }}>          
+              <CustomSidebar />            
+          </Grid>
+          <Grid size={{ xs: 11, sm: 11, md: 5, lg: 6, xl: 5 }}>
+              <FeedbackForm onSubmit={handleFormSubmit} />
+          </Grid>
+        </Grid>
     </Container>
   );
 };

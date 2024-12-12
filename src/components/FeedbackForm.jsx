@@ -1,7 +1,8 @@
 import React from "react";
-import { Box,Button, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { useState } from "react";
 import TextInput from "./TextInput";
+import CustomButton from "./CustomButton";
 
 const FeedbackForm = ({ onSubmit }) => {
   const [formData, setFormData] = useState({
@@ -20,7 +21,6 @@ const FeedbackForm = ({ onSubmit }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
     onSubmit(formData);
-    // Reset form fields after submission
     setFormData({
       name: "",
       email: "",
@@ -38,10 +38,12 @@ const FeedbackForm = ({ onSubmit }) => {
         borderRadius: 2,
         boxShadow: 3,
         display: "flex",
+        justifyContent:"center",
+        alignItems:"center",
         flexDirection: "column",
         gap: 3,
-        maxWidth: { xs: "100%", md: "600px" }, // Adjust max width for responsiveness
-        width: "100%", // Full width on mobile
+        
+
       }}
     >
       <Typography variant="h5" gutterBottom>
@@ -50,9 +52,7 @@ const FeedbackForm = ({ onSubmit }) => {
       <TextInput Label="Name" Name="name" Value={formData.name} Onchange={handleChange} SX={{ mb: 2 }} Type="text"/>
       <TextInput Label="Email" Name="email" Value={formData.email} Onchange={handleChange} SX={{ mb: 2 }} Type="email"/>
       <TextInput Label="Feedback" Name="feedback" Value={formData.feedback} Onchange={handleChange} SX={{ mb: 3 }} Type="text" Multiline={true}/>
-      <Button type="submit" variant="contained" color="primary" fullWidth>
-        Submit
-      </Button>
+      <CustomButton Type="submit" Variant="contained" Color="primary" Full={true} Text="Submit"/>
     </Box>
   );
 };

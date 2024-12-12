@@ -1,17 +1,18 @@
 import { Box, Container, Typography } from '@mui/material';
 import { Link, useLocation } from 'react-router-dom'; 
 import { styled } from '@mui/material/styles';
-import Grid from '@mui/material/Grid2'; // Import the new version of Grid
+import Grid from '@mui/material/Grid2';
 import { useEffect } from "react";
 
-const StyledLink = styled(Link)(({ theme }) => ({
+
+const StyledLink = styled(Link)(() => ({
   color: 'inherit',
   textDecoration: 'none',
   '&:hover': {
     textDecoration: 'underline',
   },
 }));
-
+export const pages=[{name:"Home",path:"/"},{name:"Add Todo",path:"/Todo"},{name:"Todo Items",path:"/TodoItems"}]
 function Footer() {
   const { pathname, hash } = useLocation(); // Get current route path and hash
 
@@ -26,7 +27,7 @@ function Footer() {
   // Scroll to the top whenever the route changes or when the same link is clicked
   useEffect(() => {
     if (!hash) {
-      scrollToTop(); // Scroll to top for all routes except hash (like feedback section)
+      scrollToTop();// Scroll to top for all routes except hash (like feedback section)
     }
   }, [pathname, hash]);
 
@@ -53,21 +54,11 @@ function Footer() {
               Quick Links
             </Typography>
             <ul style={{ listStyle: 'none', padding: 0 }}>
-              <li>
-                <StyledLink to="/" onClick={() => {
-                  if (pathname === "/") scrollToTop(); // Scroll to top if already on Home page
-                }}>Home</StyledLink>
-              </li>
-              <li>
-                <StyledLink to="/Product" onClick={() => {
-                  if (pathname === "/Product") scrollToTop();
-                }}>Product</StyledLink>
-              </li>
-              <li>
-                <StyledLink to="/Cart" onClick={() => {
-                  if (pathname === "/Cart") scrollToTop();
-                }}>Cart</StyledLink>
-              </li>
+              {pages.map((page,index)=><li>
+                <StyledLink to={page.path} onClick={() => {
+                  if (pathname === page.path) scrollToTop(); // Scroll to top if already on Home page
+                }}>{page.name}</StyledLink>
+              </li>)}
             </ul>
           </Grid>
           <Grid size={{ xs: 12, sm: 4 }}>
