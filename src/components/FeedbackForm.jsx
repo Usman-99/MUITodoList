@@ -1,36 +1,48 @@
 import React from "react";
 import { Box, Typography } from "@mui/material";
-import { useState } from "react";
 import TextInput from "./TextInput";
 import CustomButton from "./CustomButton";
+import Grid from "@mui/material/Grid2";
+import * as Yup from "yup";
+import { useFormik } from "formik";
+import ErrorComponent from "../utils/CommonFunc";
 
-const FeedbackForm = ({ onSubmit }) => {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    feedback: "",
-  });
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
-  };
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    onSubmit(formData);
-    setFormData({
-      name: "",
+const personSchema = Yup.object({
+  email: Yup.string()
+    .email("Invalid email format")
+    .trim()
+    .required("Email cannot be empty"),
+  password: Yup.string()
+    .min(8, "Password must be at least 8 characters long!")
+    .matches(/[A-Z]/, "Password must contain at least one uppercase letter!")
+    .matches(/[a-z]/, "Password must contain at least one lowercase letter!")
+    .matches(
+      /[!@#$%^&*(),.?":{}|<>]/,
+      "Password must contain at least one special character!"
+    )
+    .required("Password is required!"),
+  feedback: Yup.string()
+    .min(30, "Feedback must be at least 30 characters long!")
+    .required("Feedback is required!"),
+});
+const FeedbackForm = ({ submitHandler }) => {
+  const formik = useFormik({
+    initialValues: {
       email: "",
+      password: "",
       feedback: "",
-    });
-  };
+    },
+    validationSchema:personSchema,
+    onSubmit:(value,{resetForm})=>{
+      submitHandler(value);
+      resetForm()
+    }
+  })
+  
   return (
     <Box
       component="form"
-      onSubmit={handleSubmit}
+      onSubmit={formik.handleSubmit}
       sx={{
         p: { xs: 2, md: 4 }, // Adjust padding for different screen sizes
         bgcolor: "background.paper",
@@ -38,21 +50,64 @@ const FeedbackForm = ({ onSubmit }) => {
         borderRadius: 2,
         boxShadow: 3,
         display: "flex",
-        justifyContent:"center",
-        alignItems:"center",
+        justifyContent: "center",
+        alignItems: "center",
         flexDirection: "column",
         gap: 3,
-        
-
       }}
     >
       <Typography variant="h5" gutterBottom>
         Feedback Form
       </Typography>
-      <TextInput Label="Name" Name="name" Value={formData.name} Onchange={handleChange} SX={{ mb: 2 }} Type="text"/>
-      <TextInput Label="Email" Name="email" Value={formData.email} Onchange={handleChange} SX={{ mb: 2 }} Type="email"/>
-      <TextInput Label="Feedback" Name="feedback" Value={formData.feedback} Onchange={handleChange} SX={{ mb: 3 }} Type="text" Multiline={true}/>
-      <CustomButton Type="submit" Variant="contained" Color="primary" Full={true} Text="Submit"/>
+      <Grid container rowSpacing={2} columnSpacing={1} justifyContent="center">
+        <Grid size={{ xs: 12, sm: 6, md: 6, lg: 6 }}>
+          <TextInput
+            Label="Email"
+            Name="email"
+            Value={formik.values.email}
+            Onchange={formik.handleChange}
+           Color="success"
+            Type="email"
+            Onblur={formik.handleBlur}
+          />
+          {formik.errors.email && formik.touched.email && (<ErrorComponent Text={formik.errors.email}/> ) }
+        </Grid>
+        <Grid size={{ xs: 12, sm: 6, md: 6, lg: 6 }}>
+          <TextInput
+            Label="Password"
+            Name="password"
+            Value={formik.values.password}
+            Onchange={formik.handleChange}
+            Type="password"
+            Onblur={formik.handleBlur}
+              Color="success"
+          />
+          {formik.errors.password && formik.touched.password && (<ErrorComponent Text={formik.errors.password}/> ) }
+        </Grid>
+        <Grid size={{ xs: 12, sm: 6, md: 6, lg: 6 }}>
+          <TextInput
+            Label="Feedback"
+            Name="feedback"
+            Value={formik.values.feedback}
+            Onchange={formik.handleChange}
+            Type="text"
+            Multiline={true}
+            Onblur={formik.handleBlur}
+              Color="success"
+          />
+          {formik.errors.feedback && formik.touched.feedback && (<ErrorComponent Text={formik.errors.feedback}/> ) }
+        </Grid>
+        <Grid  display="flex" justifyContent="center" maxHeight="3.5rem">
+          <CustomButton
+            Type="submit"
+            Variant="contained"
+            Color="primary"
+            Full={true}
+            Text="Submit"
+          />
+          
+        </Grid>
+      </Grid>
     </Box>
   );
 };
