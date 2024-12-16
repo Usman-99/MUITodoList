@@ -4,6 +4,9 @@ import FeedbackForm from "../components/FeedbackForm"; // Adjust the path
 import CustomSidebar from "../components/CustomSidebar"; // Adjust the path
 import { Box, Container } from "@mui/material";
 import Grid from "@mui/material/Grid2";
+import { useDispatch} from "react-redux";
+import { addData} from "../store/personSlice";
+
 
 const Home = () => {
   const imglist = [
@@ -29,23 +32,21 @@ const Home = () => {
     },
   ];
 
-  const handleFormSubmit = (formData) => {
-    alert(
-      `Form submitted with name: ${formData.name}, email: ${formData.email}, and feedback: ${formData.feedback}`
-    );
-  };
+ const dispatch=useDispatch()
+ const submitHandler=(value)=>
+  dispatch(addData({email:value.email,password:value.password,feedback:value.feedback}))
 
   return (
-    <Container sx={{ mt: 4 }}>
+    <Container sx={{ mt: 10}}>
       <Box mb={6}>
         <CustomCarousel imglist={imglist} />
       </Box>     
         <Grid container rowSpacing={3} columnSpacing={{ xs: 1, sm: 2, md: 3,lg:7,xl:6 }} sx={{placeContent:"center"}}>
-          <Grid size={{ xs: 11, sm: 11, md: 5, lg: 5, xl: 6 }}>          
+          <Grid size={{ xs: 11, sm: 11, md: 10, lg: 6, xl: 6 }}>          
               <CustomSidebar />            
           </Grid>
-          <Grid size={{ xs: 11, sm: 11, md: 5, lg: 6, xl: 5 }}>
-              <FeedbackForm onSubmit={handleFormSubmit} />
+          <Grid size={{ xs: 11, sm: 11, md: 10, lg: 6, xl: 6 }}>
+              <FeedbackForm submitHandler={submitHandler} />
           </Grid>
         </Grid>
     </Container>
