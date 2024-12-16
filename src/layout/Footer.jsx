@@ -3,6 +3,8 @@ import { Link, useLocation } from 'react-router-dom';
 import { styled } from '@mui/material/styles';
 import Grid from '@mui/material/Grid2';
 import { useEffect } from "react";
+import { scrollToTop } from '../utils/CommonFunc';
+import { pages } from '../constants/base';
 
 
 const StyledLink = styled(Link)(() => ({
@@ -12,17 +14,9 @@ const StyledLink = styled(Link)(() => ({
     textDecoration: 'underline',
   },
 }));
-export const pages=[{name:"Home",path:"/"},{name:"Add Todo",path:"/Todo"},{name:"Todo Items",path:"/TodoItems"}]
+
 function Footer() {
   const { pathname, hash } = useLocation(); // Get current route path and hash
-
-  // Function to scroll to top
-  const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth", // Smooth scrolling to top
-    });
-  };
 
   // Scroll to the top whenever the route changes or when the same link is clicked
   useEffect(() => {

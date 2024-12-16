@@ -7,20 +7,26 @@ const TextInput = ({
   SX,
   Type,
   Multiline = false,
-  Full = false,
+  Full = true,
+  Req = false,
+  Onblur,
+  Color
 }) => {
   return (
     <TextField
       label={Label}
+      color={Color}
+      autoComplete="off"
       name={Name}
-      fullWidth
+      fullWidth={Full}
       type={Type}
-      required
+      required={Req}
       variant="outlined"
       value={Value}
       onChange={Onchange}
       sx={SX}
       multiline={Multiline}
+      onBlur={Onblur}
     />
   );
 };
