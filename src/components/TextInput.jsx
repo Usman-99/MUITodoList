@@ -10,7 +10,9 @@ const TextInput = ({
   Full = true,
   Req = false,
   Onblur,
-  Color
+  Color,
+  HelperText,
+  Error
 }) => {
   return (
     <TextField
@@ -27,6 +29,8 @@ const TextInput = ({
       sx={SX}
       multiline={Multiline}
       onBlur={Onblur}
+      error={Error}
+      helperText={HelperText}
     />
   );
 };
