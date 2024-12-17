@@ -20,6 +20,7 @@ const personSchema = Yup.object({
       /[!@#$%^&*(),.?":{}|<>]/,
       "Password must contain at least one special character!"
     )
+    .matches(/[0-9]/, "Password must contain at least one digit!")
     .required("Password is required!"),
   feedback: Yup.string()
     .min(30, "Feedback must be at least 30 characters long!")
@@ -32,13 +33,13 @@ const FeedbackForm = ({ submitHandler }) => {
       password: "",
       feedback: "",
     },
-    validationSchema:personSchema,
-    onSubmit:(value,{resetForm})=>{
+    validationSchema: personSchema,
+    onSubmit: (value, { resetForm }) => {
       submitHandler(value);
-      resetForm()
-    }
-  })
-  
+      resetForm();
+    },
+  });
+
   return (
     <Box
       component="form"
@@ -66,11 +67,15 @@ const FeedbackForm = ({ submitHandler }) => {
             Name="email"
             Value={formik.values.email}
             Onchange={formik.handleChange}
-           Color="success"
+            Color="success"
             Type="email"
             Onblur={formik.handleBlur}
+            Error={formik.touched.email && Boolean(formik.errors.email)}
+            HelperText={formik.errors.email}
           />
-          {formik.errors.email && formik.touched.email && (<ErrorComponent Text={formik.errors.email}/> ) }
+          {/* {formik.errors.email && formik.touched.email && (
+            <ErrorComponent Text={formik.errors.email} />
+          )} */}
         </Grid>
         <Grid size={{ xs: 12, sm: 6, md: 6, lg: 6 }}>
           <TextInput
@@ -80,9 +85,13 @@ const FeedbackForm = ({ submitHandler }) => {
             Onchange={formik.handleChange}
             Type="password"
             Onblur={formik.handleBlur}
-              Color="success"
+            Color="success"
+            Error={formik.touched.password && Boolean(formik.errors.password)}
+            HelperText={formik.errors.password}
           />
-          {formik.errors.password && formik.touched.password && (<ErrorComponent Text={formik.errors.password}/> ) }
+          {/* {formik.errors.password && formik.touched.password && (
+            <ErrorComponent Text={formik.errors.password} />
+          )} */}
         </Grid>
         <Grid size={{ xs: 12, sm: 6, md: 6, lg: 6 }}>
           <TextInput
@@ -93,11 +102,15 @@ const FeedbackForm = ({ submitHandler }) => {
             Type="text"
             Multiline={true}
             Onblur={formik.handleBlur}
-              Color="success"
+            Color="success"
+            Error={formik.touched.feedback && Boolean(formik.errors.feedback)}
+            HelperText={formik.errors.feedback}
           />
-          {formik.errors.feedback && formik.touched.feedback && (<ErrorComponent Text={formik.errors.feedback}/> ) }
+          {/* {formik.errors.feedback && formik.touched.feedback && (
+            <ErrorComponent Text={formik.errors.feedback} />
+          )} */}
         </Grid>
-        <Grid  display="flex" justifyContent="center" maxHeight="3.5rem">
+        <Grid display="flex" justifyContent="center" maxHeight="3.5rem">
           <CustomButton
             Type="submit"
             Variant="contained"
@@ -105,7 +118,6 @@ const FeedbackForm = ({ submitHandler }) => {
             Full={true}
             Text="Submit"
           />
-          
         </Grid>
       </Grid>
     </Box>
