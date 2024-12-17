@@ -1,81 +1,70 @@
 import { useDispatch, useSelector } from "react-redux";
-import { removeData } from "../store/personSlice";
-import DeleteIcon from "@mui/icons-material/Delete";
+import { removeData } from "../store/commonslice";
+import CustomTable from "../components/CustomTable";
 import {
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-  Paper,
-  IconButton,
   Box,
+  Typography,
 } from "@mui/material";
 const PersonData = () => {
   const dispatch = useDispatch();
-  const personsData = useSelector((state) => state.personalData.data);
+  const personsData = useSelector((state) => state.commonData.data);
   const handleDelete = (index) => dispatch(removeData(index));
   const theadData = ["Email", "Feedback", "Delete"];
-  const commonsxObj = {
-    wordWrap: "break-word", // Allow text to wrap to the next line
-    whiteSpace: "normal", // Ensure long text doesn't stay on one line
-    maxWidth: "65px", // Set a max-width to trigger wrapping on small screens
-  };
   return (
-    <Box sx={{display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        px: 2,
-       }}>
-    <TableContainer
-      component={Paper}
-      sx={{ mt: 10, mb: personsData > 5 ? "1rem" : "20rem", borderRadius: 1, border: "2px solid purple" }}
-
-    >
-      <Table sx={{ minWidth: 300 }} aria-label="Todo Table">
-        <TableHead>
-          <TableRow>
-            {theadData.map((item, index) => (
-              <TableCell
-                key={index}
-                sx={{ fontWeight: "bold" }}
-                align={item === "Delete" ? "right" : "justify"}
-              >
-                {item}
-              </TableCell>
-            ))}
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {personsData.map((item, index) => (
-            <TableRow key={index}>
-              <TableCell component="th" scope="row" sx={commonsxObj}>
-                {item.email}
-              </TableCell>
-              <TableCell
-                sx={{
-                  ...commonsxObj,
-                  maxWidth: "115px",
-                }}
-              >
-                {item.feedback}
-              </TableCell>
-              <TableCell align="right">
-                <IconButton
-                  sx={{ "&:hover": { color: "red" } }}
-                  aria-label="delete"
-                  onClick={() => handleDelete(index)}
-                >
-                  <DeleteIcon />
-                </IconButton>
-              </TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer></Box>
+    <Box><Typography
+    variant="h5"
+    component="h4"
+    sx={{
+      fontWeight: "bold",
+      mt:10,
+      mb: 4,
+      fontSize: {
+        xs: "2rem",
+        sm: "2rem",
+        md: "3rem",
+        lg: "2.5rem",
+        xl: "3rem",
+      },
+    }}
+    align="center"
+  >
+    Person Details
+  </Typography>
+      {personsData.length > 0 ? (
+        <Box sx={{mt:10, mb: personsData.length > 5 ? "1rem" : "20rem" }}>
+          <CustomTable
+            deleteData={handleDelete}
+            theadData={theadData}
+            data={personsData.map((person) => ({
+              column1: person.email,
+              column2: person.feedback,
+            }))}
+          />
+          ;
+        </Box>
+      ) : (
+        <Typography
+          variant="h3"
+          component="h3"
+          sx={{
+            mb: "20rem",
+            mt: 10,
+            fontSize: {
+              xs: "2rem",
+              sm: "2rem",
+              md: "3rem",
+              lg: "2rem",
+              xl: "2rem",
+            },
+          }}
+          align="center"
+        >
+          No records found
+        </Typography>
+      )}
+    </Box>
   );
 };
 
 export default PersonData;
+
