@@ -5,7 +5,7 @@ import CustomSidebar from "../components/CustomSidebar"; // Adjust the path
 import { Box, Container } from "@mui/material";
 import Grid from "@mui/material/Grid2";
 import { useDispatch} from "react-redux";
-import { addData} from "../store/personSlice";
+import { addData} from "../store/commonslice";
 
 
 const Home = () => {
@@ -42,10 +42,10 @@ const Home = () => {
         <CustomCarousel imglist={imglist} />
       </Box>     
         <Grid container rowSpacing={3} columnSpacing={{ xs: 1, sm: 2, md: 3,lg:7,xl:6 }} sx={{placeContent:"center"}}>
-          <Grid size={{ xs: 11, sm: 11, md: 10, lg: 6, xl: 6 }}>          
+          <Grid size={{ xs: 11, sm: 11, md: 10, lg: 4, xl: 4 }}>          
               <CustomSidebar />            
           </Grid>
-          <Grid size={{ xs: 11, sm: 11, md: 10, lg: 6, xl: 6 }}>
+          <Grid size={{ xs: 11, sm: 11, md: 10, lg: 8, xl: 8 }}>
               <FeedbackForm submitHandler={submitHandler} />
           </Grid>
         </Grid>

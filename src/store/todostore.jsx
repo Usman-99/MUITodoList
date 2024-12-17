@@ -1,11 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit";
-import todoReducer from "./todoslice";
-import personDataReducer from "./personSlice"
+import commonDataReducer from "./commonslice"
 
 const store = configureStore({
   reducer: {
-    todo: todoReducer, 
-    personalData:personDataReducer
+    commonData:commonDataReducer
   },
 });
 
