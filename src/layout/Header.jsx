@@ -15,6 +15,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import AdbIcon from "@mui/icons-material/Adb";
 import CustomButton from "../components/CustomButton";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import { HashLink } from "react-router-hash-link";
 import { scrollToTop } from "../utils/CommonFunc";
 import { pages } from "../constants/base";
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
@@ -47,9 +48,9 @@ function ResponsiveAppBar() {
     navigate("/");
     scrollToTop();
   };
-  
+
   return (
-    <AppBar position="fixed">
+    <AppBar position="fixed" color="info">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Typography
@@ -97,15 +98,24 @@ function ResponsiveAppBar() {
               {pages?.map((page, index) => (
                 <MenuItem key={index} onClick={handleCloseNavMenu}>
                   <Typography sx={{ textAlign: "center" }}>
-                    <Link
-                      to={page.path}
-                      style={{ color: "inherit", textDecoration: "none" }}
-                      onClick={() => {
-                        if (pathname === page.path) scrollToTop();
-                      }}
-                    >
-                      {page.name}
-                    </Link>
+                    {page.name === "Feedback" ? (
+                      <HashLink
+                        to={page.path}
+                        style={{ color: "inherit", textDecoration: "none" }}
+                      >
+                        {page.name}
+                      </HashLink>
+                    ) : (
+                      <Link
+                        to={page.path}
+                        style={{ color: "inherit", textDecoration: "none" }}
+                        onClick={() => {
+                          if (pathname === page.path) scrollToTop();
+                        }}
+                      >
+                        {page.name}
+                      </Link>
+                    )}
                   </Typography>
                 </MenuItem>
               ))}
@@ -126,7 +136,9 @@ function ResponsiveAppBar() {
               color: "inherit",
               textDecoration: "none",
             }}
-          > <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
+          >
+
+            <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
             MUI-Project
           </Typography>
 
@@ -138,15 +150,24 @@ function ResponsiveAppBar() {
                 Onclick={handleCloseNavMenu}
                 SX={{ my: 2, color: "white", display: "block" }}
                 Text={
-                  <Link
-                    to={page.path}
-                    style={{ color: "inherit", textDecoration: "none" }}
-                    onClick={() => {
-                      if (pathname === page.path) scrollToTop();
-                    }}
-                  >
-                    {page.name}
-                  </Link>
+                  page.name === "FeedbackForm" ? (
+                    <HashLink
+                      to={page.path}
+                      style={{ color: "inherit", textDecoration: "none" }}
+                    >
+                      {page.name}
+                    </HashLink>
+                  ) : (
+                    <Link
+                      to={page.path}
+                      style={{ color: "inherit", textDecoration: "none" }}
+                      onClick={() => {
+                        if (pathname === page.path) scrollToTop();
+                      }}
+                    >
+                      {page.name}
+                    </Link>
+                  )
                 }
               />
             ))}
