@@ -23,14 +23,11 @@ function AddTodo() {
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-        backgroundColor: "gray",
+        backgroundColor: "cyan",
         mt: 10,
         pt: 5,
         px: 2,
-        mb:
-          todoList.length > 5
-            ? "30%"
-            : { xs: "75%", sm: "90%", md: "80%", lg: "35%" },
+        mb:3
       }}
     >
       <Typography

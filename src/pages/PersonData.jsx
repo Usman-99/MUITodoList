@@ -16,14 +16,14 @@ const PersonData = () => {
     component="h4"
     sx={{
       fontWeight: "bold",
-      mt:10,
+      mt:12,
       mb: 4,
       fontSize: {
-        xs: "2rem",
-        sm: "2rem",
-        md: "3rem",
-        lg: "2.5rem",
-        xl: "3rem",
+        xs: "1rem",
+        sm: "1rem",
+        md: "1.5rem",
+        lg: "2rem",
+        xl: "2rem",
       },
     }}
     align="center"
@@ -31,7 +31,7 @@ const PersonData = () => {
     Person Details
   </Typography>
       {personsData.length > 0 ? (
-        <Box sx={{mt:10, mb: personsData.length > 5 ? "1rem" : "20rem" }}>
+        <Box sx={{mt:10, mb:2}}>
           <CustomTable
             deleteData={handleDelete}
             theadData={theadData}
@@ -47,13 +47,13 @@ const PersonData = () => {
           variant="h3"
           component="h3"
           sx={{
-            mb: "20rem",
+            mb: 3,
             mt: 10,
             fontSize: {
-              xs: "2rem",
-              sm: "2rem",
-              md: "3rem",
-              lg: "2rem",
+              xs: "1rem",
+              sm: "1rem",
+              md: "1.5rem",
+              lg: "1.5rem",
               xl: "2rem",
             },
           }}
