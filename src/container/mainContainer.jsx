@@ -5,6 +5,8 @@ import Footer from '../layout/Footer';
 import { Container, Box } from '@mui/material';
 
 const MainLayout = () => {
+  const text="Personal Details"
+  const items=["hello","world"]
   return (
     <Box
       display="flex"
@@ -13,7 +15,7 @@ const MainLayout = () => {
     >
       <Header />
       <Container component="main" sx={{ flexGrow: 1, py: 3 }}>
-        <Outlet /> 
+        <Outlet context={{text,items}}/> 
       </Container>
       <Footer />
     </Box>
