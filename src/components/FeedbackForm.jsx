@@ -114,7 +114,7 @@ const FeedbackForm = ({ submitHandler }) => {
           <CustomButton
             Type="submit"
             Variant="contained"
-            Color="primary"
+            Color="warning"
             Full={true}
             Text="Submit"
           />

@@ -1,1 +1,1 @@
-export const pages=[{name:"Home",path:"/"},{name:"Person Details",path:"/PersonDetails"},{name:"Add Todo",path:"/Todo"}]
+export const pages=[{name:"Home",path:"/"},{name:"Person Details",path:"/PersonDetails"},{name:"Add Todo",path:"/Todo"},{name:"Feedback",path:"/#FeedbackForm"}]

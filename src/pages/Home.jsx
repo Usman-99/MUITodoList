@@ -46,21 +46,19 @@ const Home = () => {
       <Box mb={6}>
         <CustomCarousel imglist={imglist} />
       </Box>
-
-      <Grid
+      <Grid component="section" id="FeedbackForm"
         container
         rowSpacing={3}
         columnSpacing={{ xs: 1, sm: 2, md: 3, lg: 7, xl: 6 }}
-        sx={{ placeContent: "center" }}
+        sx={{ placeContent: "center" ,scrollMarginTop:{ xs: "-150px", 
+          lg:"100px"}}}
       >
         <Grid size={{ xs: 11, sm: 12, md: 8, lg: 3, xl: 3 }}>
           <CustomSidebar />
         </Grid>
-        <section id="FeedbackForm">
-          <Grid size={{ xs: 11, sm: 12, md: 10, lg: 9, xl: 9 }}>
+          <Grid size={{ xs: 11, sm: 12, md: 10, lg:9, xl: 9 }}>
             <FeedbackForm submitHandler={submitHandler} />
-          </Grid>{" "}
-        </section>
+          </Grid>
       </Grid>
     </Container>
   );

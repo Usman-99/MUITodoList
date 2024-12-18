@@ -49,7 +49,7 @@ const TodoForm = ({ submitHandler }) => {
     >
       <Grid container rowSpacing={2} columnSpacing={2} justifyContent="center">
         {/* Todo Title input */}
-        <Grid size={{ xs: 12, sm: 6, md: 4 }}>
+        <Grid size={{ xs: 12, sm: 6, md: 4,lg:5 }}>
           <TextInput
             Multiline={false}
             Label="Enter a Todo..."
@@ -69,7 +69,7 @@ const TodoForm = ({ submitHandler }) => {
         </Grid>
 
         {/* Description input */}
-        <Grid size={{ xs: 12, sm: 6, md: 4 }}>
+        <Grid size={{ xs: 12, sm: 6, md: 4,lg:5 }}>
           <TextInput
             Multiline={true}
             Label="Description"
