@@ -1,0 +1,7 @@
+.sidebarhash{
+    color:white;
+    text-decoration: none;
+}
+.sidebarhash:hover{
+    text-decoration: underline;
+}
