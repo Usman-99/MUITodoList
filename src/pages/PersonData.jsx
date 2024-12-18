@@ -5,7 +5,9 @@ import {
   Box,
   Typography,
 } from "@mui/material";
+import { useOutletContext } from "react-router-dom";
 const PersonData = () => {
+    const {text,items} =useOutletContext()
   const dispatch = useDispatch();
   const personsData = useSelector((state) => state.commonData.data);
   const handleDelete = (index) => dispatch(removeData(index));
@@ -28,7 +30,8 @@ const PersonData = () => {
     }}
     align="center"
   >
-    Person Details
+    {text}
+   {/* {context.items.map(i=>(<div>{i}</div>))} */}
   </Typography>
       {personsData.length > 0 ? (
         <Box sx={{mt:10, mb:2}}>
