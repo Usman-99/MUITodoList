@@ -23,7 +23,7 @@ function AddTodo() {
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-        backgroundColor: "cyan",
+        backgroundColor:"gainsboro",
         mt: 10,
         pt: 5,
         px: 2,
@@ -57,6 +57,7 @@ function AddTodo() {
           column2: todo.description,
         }))}
       />
+
     </Box>
   );
 }
