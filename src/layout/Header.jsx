@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import {
   Avatar,
   Typography,
@@ -11,10 +11,11 @@ import {
   Tooltip,
   MenuItem,
 } from "@mui/material";
+import useScrollToTop from "../hooks/useScrollToTop";
 import MenuIcon from "@mui/icons-material/Menu";
 import AdbIcon from "@mui/icons-material/Adb";
 import CustomButton from "../components/CustomButton";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link} from "react-router-dom";
 import { HashLink } from "react-router-hash-link";
 import { scrollToTop } from "../utils/CommonFunc";
 import { pages } from "../constants/base";
@@ -23,8 +24,6 @@ const settings = ["Profile", "Account", "Dashboard", "Logout"];
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
-  const { pathname, hash } = useLocation();
-  const navigate = useNavigate(); // Get current route path and hash
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
@@ -39,22 +38,16 @@ function ResponsiveAppBar() {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
-  useEffect(() => {
-    if (!hash) {
-      scrollToTop();
-    }
-  }, [pathname, hash]);
-  const navigateFunct = () => {
-    navigate("/");
-    scrollToTop();
-  };
+  useScrollToTop();
 
   return (
     <AppBar position="fixed" color="info">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Typography
-            onClick={navigateFunct}
+            onClick={()=>{
+              navigate("/");
+              scrollToTop();}}
             variant="h6"
             noWrap
             component="a"
@@ -109,9 +102,6 @@ function ResponsiveAppBar() {
                       <Link
                         to={page.path}
                         style={{ color: "inherit", textDecoration: "none" }}
-                        onClick={() => {
-                          if (pathname === page.path) scrollToTop();
-                        }}
                       >
                         {page.name}
                       </Link>
@@ -125,7 +115,9 @@ function ResponsiveAppBar() {
             variant="h6"
             noWrap
             component="a"
-            onClick={navigateFunct}
+            onClick={() => {
+              navigate("/");
+              scrollToTop();}}
             sx={{
               mr: 2,
               display: { xs: "flex", md: "none" },
@@ -161,9 +153,6 @@ function ResponsiveAppBar() {
                       <Link
                         to={page.path}
                         style={{ color: "inherit", textDecoration: "none" }}
-                        onClick={() => {
-                          if (pathname === page.path) scrollToTop();
-                        }}
                       >
                         {page.name}
                       </Link>
