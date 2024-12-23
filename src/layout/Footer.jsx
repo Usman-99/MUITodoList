@@ -1,8 +1,7 @@
 import { Box, Container, Typography } from "@mui/material";
-import { Link, useLocation } from "react-router-dom";
+import { Link} from "react-router-dom";
 import { styled } from "@mui/material/styles";
 import Grid from "@mui/material/Grid2";
-import { useEffect } from "react";
 import { scrollToTop } from "../utils/CommonFunc";
 import { pages } from "../constants/base";
 import { HashLink } from "react-router-hash-link";
@@ -16,15 +15,6 @@ const StyledLink = styled(Link)(() => ({
 }));
 
 function Footer() {
-  const { pathname, hash } = useLocation(); // Get current route path and hash
-
-  // Scroll to the top whenever the route changes or when the same link is clicked
-  useEffect(() => {
-    if (!hash) {
-      scrollToTop(); // Scroll to top for all routes except hash (like feedback section)
-    }
-  }, [pathname, hash]);
-
   return (
     <Box
       sx={{
@@ -62,9 +52,6 @@ function Footer() {
                     <StyledLink
                       key={index}
                       to={page.path}
-                      onClick={() => {
-                        if (pathname === page.path) scrollToTop(); // Scroll to top if already on Home page
-                      }}
                     >
                       {page.name}
                     </StyledLink>
