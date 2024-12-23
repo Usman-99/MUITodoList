@@ -1,16 +1,16 @@
-import React, { useState } from 'react';
-import { Box, IconButton } from '@mui/material';
-import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-import { useTheme } from '@mui/material/styles';
+import React, { useState } from "react";
+import { Box, IconButton } from "@mui/material";
+import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import { useTheme } from "@mui/material/styles";
 
-const commonObj={
-  position: 'absolute',
-  top: '50%',
-  transform: 'translateY(-50%)',
-  backgroundColor: 'rgba(255, 255, 255, 0.3)',
-  '&:hover': {
-    backgroundColor: 'rgba(255, 255, 255, 0.5)',
+const commonObj = {
+  position: "absolute",
+  top: "50%",
+  transform: "translateY(-50%)",
+  backgroundColor: "rgba(255, 255, 255, 0.3)",
+  "&:hover": {
+    backgroundColor: "rgba(255, 255, 255, 0.5)",
   },
 };
 const CustomCarousel = ({ imglist }) => {
@@ -30,34 +30,34 @@ const CustomCarousel = ({ imglist }) => {
   };
 
   return (
-    <Box sx={{ position: 'relative', width: '100%', overflow: 'hidden' }}>
+    <Box sx={{ position: "relative", width: "100%", overflow: "hidden" }}>
       <Box
         sx={{
-          position: 'relative',
-          height: { xs: '200px', md: '400px' }, // Responsive height
-          overflow: 'hidden',
-          borderRadius: '8px',
+          position: "relative",
+          height: { xs: "200px", md: "400px" }, // Responsive height
+          overflow: "hidden",
+          borderRadius: "8px",
         }}
       >
         {imglist.map((item, index) => (
           <Box
             key={index}
             sx={{
-              display: currentIndex === index ? 'block' : 'none',
-              position: 'absolute',
-              top: '50%',
-              left: '50%',
-              transform: 'translate(-50%, -50%)',
-              width: '100%',
+              display: currentIndex === index ? "block" : "none",
+              position: "absolute",
+              top: "50%",
+              left: "50%",
+              transform: "translate(-50%, -50%)",
+              width: "100%",
             }}
           >
             <img
               src={item.src}
               alt={item.alt}
               style={{
-                width: '100%',
-                height: '100%',
-                objectFit: 'cover',
+                width: "100%",
+                height: "100%",
+                objectFit: "cover",
               }}
             />
           </Box>
@@ -67,21 +67,21 @@ const CustomCarousel = ({ imglist }) => {
       {/* Indicators */}
       <Box
         sx={{
-          position: 'absolute',
-          bottom: '10px',
-          left: '50%',
-          transform: 'translateX(-50%)',
-          display: 'flex',
-          gap: '8px',
+          position: "absolute",
+          bottom: "10px",
+          left: "50%",
+          transform: "translateX(-50%)",
+          display: "flex",
+          gap: "8px",
         }}
       >
         {imglist.map((_, index) => (
           <IconButton
             key={index}
             sx={{
-              width: '10px',
-              height: '10px',
-              borderRadius: '50%',
+              width: "10px",
+              height: "10px",
+              borderRadius: "50%",
               backgroundColor:
                 currentIndex === index
                   ? theme.palette.primary.main
@@ -93,17 +93,11 @@ const CustomCarousel = ({ imglist }) => {
       </Box>
 
       {/* Slider Controls */}
-      <IconButton
-        sx={{...commonObj,left:"10px"}}
-        onClick={handlePrev}
-      >
+      <IconButton sx={{ ...commonObj, left: "10px" }} onClick={handlePrev}>
         <ArrowBackIosNewIcon />
       </IconButton>
 
-      <IconButton
-        sx={{...commonObj,right:"10px"}}
-        onClick={handleNext}
-      >
+      <IconButton sx={{ ...commonObj, right: "10px" }} onClick={handleNext}>
         <ArrowForwardIosIcon />
       </IconButton>
     </Box>

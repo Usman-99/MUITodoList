@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
-import { scrollToTop } from "../utils/CommonFunc" // Adjust the path to your scroll function
+import { scrollToTop } from "../utils/CommonFunc"; // Adjust the path to your scroll function
 
 const useScrollToTop = () => {
   const { pathname, hash } = useLocation(); // Get current route path and hash

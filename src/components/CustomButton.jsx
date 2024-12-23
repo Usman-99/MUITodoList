@@ -8,7 +8,7 @@ const CustomButton = ({
   SX,
   Full = false,
   Text,
-  Size
+  Size,
 }) => {
   return (
     <Button

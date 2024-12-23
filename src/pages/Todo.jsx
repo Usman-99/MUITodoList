@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Box, Typography } from "@mui/material";
 import TodoForm from "../components/TodoForm";
 import CustomTable from "../components/CustomTable";
-import {addTodo,deleteTodo} from "../store/commonslice"
+import { addTodo, deleteTodo } from "../store/commonslice";
 function AddTodo() {
   const dispatch = useDispatch();
   const todoList = useSelector((state) => state.commonData.todoItems); // Get todos from Redux state
@@ -23,11 +23,11 @@ function AddTodo() {
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-        backgroundColor:"gainsboro",
+        backgroundColor: "gainsboro",
         mt: 10,
         pt: 5,
         px: 2,
-        mb:3
+        mb: 3,
       }}
     >
       <Typography
@@ -57,7 +57,6 @@ function AddTodo() {
           column2: todo.description,
         }))}
       />
-
     </Box>
   );
 }
