@@ -28,6 +28,7 @@ function AddTodo() {
         pt: 5,
         px: 2,
         mb: 3,
+        borderRadius:"2rem"
       }}
     >
       <Typography

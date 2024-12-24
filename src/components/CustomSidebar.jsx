@@ -26,7 +26,7 @@ const CustomSidebar = () => {
       <Box>
         {pages.map((page, index) =>
           page.name === "Feedback" ? (
-            <HashLink class="sidebarhash" to={page.path}>
+            <HashLink className="sidebarhash" to={page.path}>
               {page.name}
             </HashLink>
           ) : (

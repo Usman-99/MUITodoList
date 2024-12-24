@@ -41,7 +41,6 @@ const PersonData = () => {
               column2: person.feedback,
             }))}
           />
-          ;
         </Box>
       ) : (
         <Typography
