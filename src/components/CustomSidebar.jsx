@@ -20,9 +20,7 @@ const CustomSidebar = () => {
 
   return (
     <Box sx={{ p: 3, bgcolor: "info.light", borderRadius: 2 }}>
-      <Typography variant="h6" sx={{ fontWeight: "bold" }} gutterBottom>
-        Sidebar
-      </Typography>
+      
       <Box>
         {pages.map((page, index) =>
           page.name === "Feedback" ? (
