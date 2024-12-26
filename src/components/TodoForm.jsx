@@ -95,7 +95,7 @@ const TodoForm = ({ submitHandler }) => {
         </Grid>
 
         {/* Add Todo Button */}
-        <Grid size={{ xs:12, sm: 3, md: 3,lg:2 }} display="flex" justifyContent="center" maxHeight="2.5rem">
+        <Grid size={{ xs:12, sm: 2.5, md: 2,lg:2 }} display="flex" justifyContent="center" maxHeight="2.5rem">
           <CustomButton
             Size="small"
             Type="submit"
