@@ -1,6 +1,7 @@
 .sidebarhash{
     color:white;
     text-decoration: none;
+    ;margin-bottom:10px;display: block;
 }
 .sidebarhash:hover{
     text-decoration: underline;
