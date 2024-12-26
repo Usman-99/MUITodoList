@@ -1,17 +1,27 @@
-import React from "react";
-import { Box, Typography } from "@mui/material";
+import { useState } from "react";
+import {
+  Box,
+  Typography,
+  IconButton,
+  InputAdornment,
+  FormControl,
+  InputLabel,
+  OutlinedInput,
+} from "@mui/material";
 import TextInput from "./TextInput";
 import CustomButton from "./CustomButton";
 import Grid from "@mui/material/Grid2";
 import * as Yup from "yup";
 import { useFormik } from "formik";
+import Visibility from "@mui/icons-material/Visibility";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import ErrorComponent from "../utils/CommonFunc";
 
 const personSchema = Yup.object({
   email: Yup.string()
     .email("Invalid email format")
     .trim()
-    .required("Email cannot be empty"),
+    .required("Email is required!"),
   password: Yup.string()
     .min(8, "Password must be at least 8 characters long!")
     .matches(/[A-Z]/, "Password must contain at least one uppercase letter!")
@@ -26,7 +36,10 @@ const personSchema = Yup.object({
     .min(30, "Feedback must be at least 30 characters long!")
     .required("Feedback is required!"),
 });
+
 const FeedbackForm = ({ submitHandler }) => {
+  const [showPassword, setShowPassword] = useState(false);
+
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -40,17 +53,29 @@ const FeedbackForm = ({ submitHandler }) => {
     },
   });
 
+  const handleClickShowPassword = () => {
+    if (formik.values.password !== "") {
+      setShowPassword(!showPassword);
+    }
+  };
+
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault();
+  };
+
   return (
     <Box
       component="form"
       onSubmit={formik.handleSubmit}
       sx={{
-        p: { xs: 2, md: 4 }, // Adjust padding for different screen sizes
+        p: { xs: 2, md: 4 ,sm:3},
         bgcolor: "background.paper",
         marginBottom: "15px",
         borderRadius: 2,
         boxShadow: 3,
         display: "flex",
+        mx: {sm:"1rem",md:"2rem",lg:"3rem"},
+        px:{sm:"5rem",md:"9rem",lg:"10rem"},
         justifyContent: "center",
         alignItems: "center",
         flexDirection: "column",
@@ -61,7 +86,7 @@ const FeedbackForm = ({ submitHandler }) => {
         Feedback Form
       </Typography>
       <Grid container rowSpacing={2} columnSpacing={1} justifyContent="center">
-        <Grid size={{ xs: 12, sm: 6, md: 6, lg: 6 }}>
+        <Grid size={{ xs: 12, sm: 12, md: 12, lg: 12 }}>
           <TextInput
             Label="Email"
             Name="email"
@@ -72,28 +97,51 @@ const FeedbackForm = ({ submitHandler }) => {
             Onblur={formik.handleBlur}
             Error={formik.touched.email && Boolean(formik.errors.email)}
             HelperText={formik.errors.email}
+            Size="small"
           />
-          {/* {formik.errors.email && formik.touched.email && (
-            <ErrorComponent Text={formik.errors.email} />
-          )} */}
         </Grid>
-        <Grid size={{ xs: 12, sm: 6, md: 6, lg: 6 }}>
-          <TextInput
-            Label="Password"
-            Name="password"
-            Value={formik.values.password}
-            Onchange={formik.handleChange}
-            Type="password"
-            Onblur={formik.handleBlur}
-            Color="success"
-            Error={formik.touched.password && Boolean(formik.errors.password)}
-            HelperText={formik.errors.password}
-          />
-          {/* {formik.errors.password && formik.touched.password && (
-            <ErrorComponent Text={formik.errors.password} />
-          )} */}
+        <Grid size={{ xs: 12, sm: 12, md: 12, lg: 12 }}>
+          <FormControl sx={{ width: "100%" }} variant="outlined" size="small">
+            <InputLabel
+              htmlFor="outlined-adornment-password"
+              error={formik.touched.password && Boolean(formik.errors.password)}
+              sx={{
+                backgroundColor: "background.paper",
+                px: 0.5,
+              }}
+            >
+              Password
+            </InputLabel>
+            <OutlinedInput
+              id="outlined-adornment-password"
+              type={showPassword ? "text" : "password"}
+              value={formik.values.password}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              name="password"
+              size="small"
+              error={formik.touched.password && Boolean(formik.errors.password)}
+              endAdornment={
+                <InputAdornment position="end">
+                  <IconButton
+                    aria-label="toggle password visibility"
+                    onClick={handleClickShowPassword}
+                    onMouseDown={handleMouseDownPassword}
+                    edge="end"
+                    size="small"
+                  >
+                    {showPassword ? <Visibility /> : <VisibilityOff />}
+                  </IconButton>
+                </InputAdornment>
+              }
+              label="Password"
+            />
+            {formik.errors.password && formik.touched.password && (
+              <ErrorComponent Text={formik.errors.password} />
+            )}
+          </FormControl>
         </Grid>
-        <Grid size={{ xs: 12, sm: 6, md: 6, lg: 6 }}>
+        <Grid size={{ xs: 12, sm: 12, md: 12, lg: 12 }}>
           <TextInput
             Label="Feedback"
             Name="feedback"
@@ -105,12 +153,10 @@ const FeedbackForm = ({ submitHandler }) => {
             Color="success"
             Error={formik.touched.feedback && Boolean(formik.errors.feedback)}
             HelperText={formik.errors.feedback}
+            Size="small"
           />
-          {/* {formik.errors.feedback && formik.touched.feedback && (
-            <ErrorComponent Text={formik.errors.feedback} />
-          )} */}
         </Grid>
-        <Grid display="flex" justifyContent="center" maxHeight="3.5rem">
+        <Grid size={{ xs: 12, sm: 12, md: 12, lg: 12 }} display="flex" justifyContent="center" maxHeight="2.5rem">
           <CustomButton
             Type="submit"
             Variant="contained"
