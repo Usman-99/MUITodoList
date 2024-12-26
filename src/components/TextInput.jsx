@@ -12,7 +12,8 @@ const TextInput = ({
   Onblur,
   Color,
   HelperText,
-  Error
+  Error,
+  Size
 }) => {
   return (
     <TextField
@@ -27,6 +28,7 @@ const TextInput = ({
       value={Value}
       onChange={Onchange}
       sx={SX}
+      size={Size}
       multiline={Multiline}
       onBlur={Onblur}
       error={Error}

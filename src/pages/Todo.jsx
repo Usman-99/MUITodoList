@@ -1,9 +1,8 @@
-// Todo page with redux toolkit,formik and yup
 import { useDispatch, useSelector } from "react-redux";
 import { Box, Typography } from "@mui/material";
 import TodoForm from "../components/TodoForm";
 import CustomTable from "../components/CustomTable";
-import {addTodo,deleteTodo} from "../store/commonslice"
+import { addTodo, deleteTodo } from "../store/commonslice";
 function AddTodo() {
   const dispatch = useDispatch();
   const todoList = useSelector((state) => state.commonData.todoItems); // Get todos from Redux state
@@ -23,11 +22,12 @@ function AddTodo() {
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-        backgroundColor:"gainsboro",
+        backgroundColor: "gainsboro",
         mt: 10,
         pt: 5,
         px: 2,
-        mb:3
+        mb: 3,
+        borderRadius: "2rem",
       }}
     >
       <Typography
@@ -49,15 +49,35 @@ function AddTodo() {
         Todos List
       </Typography>
       <TodoForm submitHandler={submitHandler} />
-      <CustomTable
-        deleteData={handleDelete}
-        theadData={theadData}
-        data={todoList.map((todo) => ({
-          column1: todo.title,
-          column2: todo.description,
-        }))}
-      />
-
+      {todoList.length > 0 ? (
+        <CustomTable
+          deleteData={handleDelete}
+          theadData={theadData}
+          data={todoList.map((todo) => ({
+            column1: todo.title,
+            column2: todo.description,
+          }))}
+        />
+      ) : (
+        <Typography
+          variant="h3"
+          component="h3"
+          sx={{
+            mb: 3,
+            mt: 10,
+            fontSize: {
+              xs: "1rem",
+              sm: "1rem",
+              md: "1.5rem",
+              lg: "1.5rem",
+              xl: "2rem",
+            },
+          }}
+          align="center"
+        >
+          No records found
+        </Typography>
+      )}
     </Box>
   );
 }

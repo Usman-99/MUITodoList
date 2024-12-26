@@ -48,7 +48,9 @@ const commonsxObj={
               <TableCell align="right">
                 <IconButton
                   sx={{ "&:hover": { color: "red" } }}
+                  size="large"
                   aria-label="delete"
+                  color="secondary"
                   onClick={() => deleteData(index)}
                 >
                   <DeleteIcon />

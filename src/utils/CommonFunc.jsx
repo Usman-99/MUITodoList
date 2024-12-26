@@ -6,7 +6,7 @@ export const scrollToTop = () => {
   });
 };
 const ErrorComponent = ({ Text }) => (
-  <Typography color="error" sx={{ fontSize: "0.875rem" }}>
+  <Typography color="error" sx={{ fontSize: "0.775rem", marginLeft:"1rem" }}>
     {Text}
   </Typography>
 );
