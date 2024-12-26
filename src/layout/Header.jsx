@@ -1,4 +1,5 @@
 import { useState } from "react";
+import logo from "../assets/logo.png";
 import {
   Avatar,
   Typography,
@@ -13,9 +14,8 @@ import {
 } from "@mui/material";
 import useScrollToTop from "../hooks/useScrollToTop";
 import MenuIcon from "@mui/icons-material/Menu";
-import AdbIcon from "@mui/icons-material/Adb";
 import CustomButton from "../components/CustomButton";
-import { Link} from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { HashLink } from "react-router-hash-link";
 import { scrollToTop } from "../utils/CommonFunc";
 import { pages } from "../constants/base";
@@ -39,35 +39,37 @@ function ResponsiveAppBar() {
     setAnchorElUser(null);
   };
   useScrollToTop();
-
+  const navigate = useNavigate();
   return (
-    <AppBar position="fixed" color="info">
+    <AppBar
+      position="fixed"
+      sx={{ backgroundColor: "lightsteelblue" }}
+    >
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <Typography
-            onClick={()=>{
+          {/* Desktop Logo */}
+          <Box
+            component="img"
+            alt="logo"
+            src={logo}
+            onClick={() => {
               navigate("/");
-              scrollToTop();}}
-            variant="h6"
-            noWrap
-            component="a"
-            sx={{
-              mr: 2,
-              display: { xs: "none", md: "flex" },
-              fontFamily: "monospace",
-              fontWeight: 700,
-              letterSpacing: ".2rem",
-              color: "inherit",
-              textDecoration: "none",
-              cursor: "pointer",
+              scrollToTop();
             }}
-          >
-            <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
-            MUI-Project
-          </Typography>
+            sx={{
+              display: { xs: "none", md: "flex" },
+              cursor: "pointer",
+              height: "50px", // Desktop height
+              width: "auto",
+            }}
+          />
 
           {/* Mobile Menu Icon */}
-          <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
+          <Box sx={{ 
+           
+            display: { xs: "flex", md: "none" },
+            justifyContent: "flex-start" 
+          }}>
             <IconButton
               size="large"
               aria-label="account of current user"
@@ -111,37 +113,47 @@ function ResponsiveAppBar() {
               ))}
             </Menu>
           </Box>
-          <Typography
-            variant="h6"
-            noWrap
-            component="a"
-            onClick={() => {
-              navigate("/");
-              scrollToTop();}}
-            sx={{
-              mr: 2,
-              display: { xs: "flex", md: "none" },
-              flexGrow: 1,
-              fontFamily: "monospace",
-              fontWeight: 700,
-              letterSpacing: ".2rem",
-              color: "inherit",
-              textDecoration: "none",
-            }}
-          >
-            <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
-            MUI-Project
-          </Typography>
+
+          {/* Mobile Logo */}
+          <Box sx={{ 
+            flexGrow: 1, 
+            display: { xs: "flex", md: "none" },
+            justifyContent: "center", // Center the logo
+            alignItems: "center"      // Vertically center the logo
+          }}>
+            <Box
+              component="img"
+              alt="logo"
+              src={logo}
+              onClick={() => {
+                navigate("/");
+                scrollToTop();
+              }}
+              sx={{
+                cursor: "pointer",
+                height: { xs: "40px", sm: "45px" }, // Smaller height for mobile
+                width: "auto",
+                maxWidth: { xs: "150px", sm: "180px" }, // Control maximum width
+                objectFit: "contain" // Maintain aspect ratio
+              }}
+            />
+          </Box>
 
           {/* Desktop Menu Links */}
-          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
+          <Box
+            sx={{
+              flexGrow: 1,
+              display: { xs: "none", md: "flex" },
+              justifyContent: "center",
+            }}
+          >
             {pages?.map((page, index) => (
               <CustomButton
                 key={index}
                 Onclick={handleCloseNavMenu}
-                SX={{ my: 2, color: "white", display: "block" }}
+                SX={{ my: 2, color: "maroon", display: "block" }}
                 Text={
-                  <Typography sx={{ textAlign: "center" }}>
+                  <Typography sx={{ textAlign: "center", fontWeight: "bold" }}>
                     {page.name === "Feedback" ? (
                       <HashLink
                         to={page.path}

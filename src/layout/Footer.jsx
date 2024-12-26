@@ -1,8 +1,7 @@
 import { Box, Container, Typography } from "@mui/material";
-import { Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import { styled } from "@mui/material/styles";
 import Grid from "@mui/material/Grid2";
-import { scrollToTop } from "../utils/CommonFunc";
 import { pages } from "../constants/base";
 import { HashLink } from "react-router-hash-link";
 
@@ -18,7 +17,8 @@ function Footer() {
   return (
     <Box
       sx={{
-        backgroundColor: "info.main",
+        backgroundColor: "#9ab2d0",
+        borderRadius: "1.5rem",
         color: "white",
         padding: "20px 0",
       }}
@@ -49,10 +49,7 @@ function Footer() {
                       {page.name}
                     </HashLink>
                   ) : (
-                    <StyledLink
-                      key={index}
-                      to={page.path}
-                    >
+                    <StyledLink key={index} to={page.path}>
                       {page.name}
                     </StyledLink>
                   )}

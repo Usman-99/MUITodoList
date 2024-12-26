@@ -39,6 +39,10 @@ const TodoForm = ({ submitHandler }) => {
       onSubmit={formik.handleSubmit}
       sx={{
         width: "100%",
+        display:"flex",
+        justifyContent: "center",
+  
+        flexDirection: "column",
         px: 1,
         mt: 4,
         pt: 2,
@@ -91,7 +95,7 @@ const TodoForm = ({ submitHandler }) => {
         </Grid>
 
         {/* Add Todo Button */}
-        <Grid display="flex" justifyContent="center" maxHeight="2.5rem">
+        <Grid size={{ xs:12, sm: 3, md: 3,lg:2 }} display="flex" justifyContent="center" maxHeight="2.5rem">
           <CustomButton
             Size="small"
             Type="submit"
@@ -99,6 +103,7 @@ const TodoForm = ({ submitHandler }) => {
             Color="secondary"
             SX={{ fontWeight: "bold" }}
             Text="Add Todo"
+            Full={true}
           />
         </Grid>
       </Grid>
