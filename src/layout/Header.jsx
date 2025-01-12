@@ -148,12 +148,8 @@ function ResponsiveAppBar() {
             }}
           >
             {pages?.map((page, index) => (
-              <CustomButton
-                key={index}
-                Onclick={handleCloseNavMenu}
-                SX={{ my: 2, color: "maroon", display: "block" }}
-                Text={
-                  <Typography sx={{ textAlign: "center", fontWeight: "bold" }}>
+            
+                  <Typography key={index}  sx={{borderRadius:6,px:2,backgroundColor:"AliceBlue",my:2,mr:2, color: "maroon", display: "block" , textAlign: "center", fontWeight: "bold","&:hover": { color: "black" } }}>
                     {page.name === "Feedback" ? (
                       <HashLink
                         to={page.path}
@@ -170,8 +166,6 @@ function ResponsiveAppBar() {
                       </Link>
                     )}
                   </Typography>
-                }
-              />
             ))}
           </Box>
 
