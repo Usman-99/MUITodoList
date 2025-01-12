@@ -149,20 +149,20 @@ function ResponsiveAppBar() {
           >
             {pages?.map((page, index) => (
             
-                  <Typography key={index}  sx={{borderRadius:6,px:2,backgroundColor:"AliceBlue",my:2,mr:2, color: "maroon", display: "block" , textAlign: "center", fontWeight: "bold","&:hover": { color: "black" } }}>
+                  <Typography key={index}  sx={{borderRadius:6,backgroundColor:"AliceBlue",my:2,mr:2, color: "maroon", display: "block" , textAlign: "center", fontWeight: "bold","&:hover": { color: "black" } }}>
                     {page.name === "Feedback" ? (
                       <HashLink
                         to={page.path}
                         style={{ color: "inherit", textDecoration: "none" }}
                       >
-                        {page.name}
+                        &nbsp;&nbsp;{page.name}&nbsp;&nbsp;
                       </HashLink>
                     ) : (
                       <Link
                         to={page.path}
                         style={{ color: "inherit", textDecoration: "none" }}
                       >
-                        {page.name}
+                        &nbsp;&nbsp;{page.name}&nbsp;&nbsp;
                       </Link>
                     )}
                   </Typography>
