@@ -68,14 +68,14 @@ const FeedbackForm = ({ submitHandler }) => {
       component="form"
       onSubmit={formik.handleSubmit}
       sx={{
-        p: { xs: 2, md: 4 ,sm:3},
+        p: { xs: 2, md: 4, sm: 3 },
         bgcolor: "background.paper",
         marginBottom: "15px",
         borderRadius: 2,
         boxShadow: 3,
         display: "flex",
-        mx: {sm:"1rem",md:"2rem",lg:"3rem"},
-        px:{sm:"5rem",md:"9rem",lg:"10rem"},
+        mx: { sm: "1rem", md: "2rem", lg: "3rem" },
+        px: { sm: "5rem", md: "9rem", lg: "10rem" },
         justifyContent: "center",
         alignItems: "center",
         flexDirection: "column",
@@ -86,7 +86,7 @@ const FeedbackForm = ({ submitHandler }) => {
         Feedback Form
       </Typography>
       <Grid container rowSpacing={2} columnSpacing={1} justifyContent="center">
-        <Grid size={{ xs: 12, sm: 12, md: 12, lg: 12 }}>
+        <Grid size={{ xs: 12 }}>
           <TextInput
             Label="Email"
             Name="email"
@@ -100,7 +100,7 @@ const FeedbackForm = ({ submitHandler }) => {
             Size="small"
           />
         </Grid>
-        <Grid size={{ xs: 12, sm: 12, md: 12, lg: 12 }}>
+        <Grid size={{ xs: 12 }}>
           <FormControl sx={{ width: "100%" }} variant="outlined" size="small">
             <InputLabel
               htmlFor="outlined-adornment-password"
@@ -141,7 +141,7 @@ const FeedbackForm = ({ submitHandler }) => {
             )}
           </FormControl>
         </Grid>
-        <Grid size={{ xs: 12, sm: 12, md: 12, lg: 12 }}>
+        <Grid size={{ xs: 12 }}>
           <TextInput
             Label="Feedback"
             Name="feedback"
@@ -156,7 +156,12 @@ const FeedbackForm = ({ submitHandler }) => {
             Size="small"
           />
         </Grid>
-        <Grid size={{ xs: 12, sm: 12, md: 12, lg: 12 }} display="flex" justifyContent="center" maxHeight="2.5rem">
+        <Grid
+          size={{ xs: 12 }}
+          display="flex"
+          justifyContent="center"
+          maxHeight="2.5rem"
+        >
           <CustomButton
             Type="submit"
             Variant="contained"
